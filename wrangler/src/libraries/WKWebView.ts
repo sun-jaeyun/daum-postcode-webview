@@ -1,3 +1,5 @@
-import { DEFAULT_HANDLER_NAME } from "../consts";
+import { CHANNEL_NAME } from '../consts';
 
-const WKWebView = `(data)=>{window.webkit.messageHandlers.${DEFAULT_HANDLER_NAME}.postMessage(data);}`;
+const WKWebView = `(data)=>{window.webkit.messageHandlers.${CHANNEL_NAME}.postMessage(data);}`;
+
+export default WKWebView;
