@@ -15,6 +15,8 @@
 
 ## TODO
 
+### [serverless](https://www.serverless.com) 프레임워크 지원
+
 ### 테스트 코드 작성
 
 - [ ] wrangler

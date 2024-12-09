@@ -1,0 +1,14 @@
+{
+  "name": "daum-postcode-webview",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "wrangler-dev": "pnpm --filter daum-postcode-webview-wrangler run dev",
+    "wrangler-test": "pnpm --filter daum-postcode-webview-wrangler run test",
+    "wrangler-deploy": "pnpm --filter daum-postcode-webview-wrangler run deploy"
+  },
+  "keywords": [],
+  "author": "Sun-JaeYun",
+  "license": "ISC"
+}
