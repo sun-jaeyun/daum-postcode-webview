@@ -1,7 +1,7 @@
 import { DEFAULT_LIBRARY, TITLE } from './consts';
 import DaumPostcodeHtml from './DaumPostcodeHtml';
 import libraries from './libraries';
-import type Theme from './theme';
+import type Theme from './types/theme';
 import {
 	validateBooleanParams,
 	validateNumberParams,
@@ -11,21 +11,25 @@ import {
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
 		const { pathname, searchParams } = new URL(request.url);
+
+		// 루트를 제외하곤 Not found
 		if (pathname !== '/') {
 			return new Response('Not found', { status: 404 });
 		}
 
+		// Document Title
 		const title = searchParams.get('title') ?? TITLE;
-		const library = searchParams.get('library') ?? DEFAULT_LIBRARY;
 
+		// onComplete
+		const library = searchParams.get('library') ?? DEFAULT_LIBRARY;
 		const onComplete = libraries.get(library);
-		// https://postcode.map.daum.net/guide
+
 		/*
-			Default
+			parameters - https://postcode.map.daum.net/guide
 
 			minWidth: 300 (0 ~ 300),
-			width: 500 (< 300),
-			height: 500 (< 400),
+			width: 500 (> 300),
+			height: 500 (> 400),
       animation: false,
       shorthand: true,
       focusInput: true,
@@ -35,82 +39,40 @@ export default {
       pleaseReadGuideTimer: 1.5 (0.1 ~ 60)
       maxSuggestItems: 10 (1 ~ 10),
       showMoreHName: false,
-      hideMapBtn: false (recommend true),
+      hideMapBtn: false,
       hideEngBtn: false,
       alwaysShowEngAddr: false,
       submitMode: true,
-      useBannerLink: true (recommend false),
+      useBannerLink: true,
     */
-		const width = validateSizeParams({
-			value: searchParams.get('width'),
+		const width = validateSizeParams(searchParams.get('width'), {
 			defaultValue: '100%',
 			min: 300,
 		});
-		const height = validateSizeParams({
-			value: searchParams.get('height'),
+		const height = validateSizeParams(searchParams.get('height'), {
 			defaultValue: '100%',
 			min: 400,
 		});
-		const animation = validateBooleanParams({
-			value: searchParams.get('animation'),
-			defaultValue: false,
-		});
-		const shorthand = validateBooleanParams({
-			value: searchParams.get('shorthand'),
-			defaultValue: true,
-		});
-		const focusInput = validateBooleanParams({
-			value: searchParams.get('focusInput'),
-			defaultValue: true,
-		});
-		const autoMappingRoad = validateBooleanParams({
-			value: searchParams.get('autoMappingRoad'),
-			defaultValue: true,
-		});
-		const autoMappingJibun = validateBooleanParams({
-			value: searchParams.get('autoMappingJutable'),
-			defaultValue: true,
-		});
-		const pleaseReadGuide = validateNumberParams({
-			value: searchParams.get('pleaseReadGuide'),
-			defaultValue: 0,
+		const animation = validateBooleanParams(searchParams.get('animation'));
+		const shorthand = validateBooleanParams(searchParams.get('shorthand'));
+		const focusInput = validateBooleanParams(searchParams.get('focusInput'));
+		const autoMappingRoad = validateBooleanParams(searchParams.get('autoMappingRoad'));
+		const autoMappingJibun = validateBooleanParams(searchParams.get('autoMappingJutable'));
+		const pleaseReadGuide = validateNumberParams(searchParams.get('pleaseReadGuide'), {
 			min: 3,
 			max: 20,
 		});
-		const pleaseReadGuideTimer = validateNumberParams({
-			value: searchParams.get('pleaseReadGuideTimer'),
-			defaultValue: 1.5,
+		const pleaseReadGuideTimer = validateNumberParams(searchParams.get('pleaseReadGuideTimer'), {
 			min: 0.1,
 			max: 60,
 		});
-		const maxSuggestItems = validateNumberParams({
-			value: searchParams.get('maxSuggestItems'),
-			defaultValue: 10,
-		});
-		const showMoreHName = validateBooleanParams({
-			value: searchParams.get('showMoreHNameEnabled'),
-			defaultValue: false,
-		});
-		const hideMapBtn = validateBooleanParams({
-			value: searchParams.get('hideMapBtnEnabled'),
-			defaultValue: true,
-		});
-		const hideEngBtn = validateBooleanParams({
-			value: searchParams.get('hideEngBtn'),
-			defaultValue: false,
-		});
-		const alwaysShowEngAddr = validateBooleanParams({
-			value: searchParams.get('alwaysShowEngAddr'),
-			defaultValue: false,
-		});
-		const submitMode = validateBooleanParams({
-			value: searchParams.get('submitMode'),
-			defaultValue: true,
-		});
-		const useBannerLink = validateBooleanParams({
-			value: searchParams.get('useBannerLink'),
-			defaultValue: false,
-		});
+		const maxSuggestItems = validateNumberParams(searchParams.get('maxSuggestItems'));
+		const showMoreHName = validateBooleanParams(searchParams.get('showMoreHNameEnabled'));
+		const hideMapBtn = validateBooleanParams(searchParams.get('hideMapBtnEnabled'));
+		const hideEngBtn = validateBooleanParams(searchParams.get('hideEngBtn'));
+		const alwaysShowEngAddr = validateBooleanParams(searchParams.get('alwaysShowEngAddr'));
+		const submitMode = validateBooleanParams(searchParams.get('submitMode'));
+		const useBannerLink = validateBooleanParams(searchParams.get('useBannerLink'));
 
 		// theme
 		const bgColor = searchParams.get('bgColor');
@@ -134,6 +96,7 @@ export default {
 			outlineColor,
 		};
 
+		// make html output
 		const html = DaumPostcodeHtml({
 			onComplete,
 			title,
@@ -156,6 +119,7 @@ export default {
 			theme,
 		});
 
+		// return response with html content type and encoding utf-8
 		return new Response(html, {
 			headers: { 'Content-Type': 'text/html; charset=utf-8', 'Content-Encoding': 'utf-8' },
 		});
