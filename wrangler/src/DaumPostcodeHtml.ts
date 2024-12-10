@@ -1,4 +1,4 @@
-import type Props from './props';
+import type Props from './types/props';
 import objectToPlainText from './utils/objectToPlainText';
 
 const DaumPostcodeHtml = ({ onComplete, title, ...props }: Props) => {

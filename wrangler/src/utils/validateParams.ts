@@ -1,10 +1,13 @@
-export const validateBooleanParams = ({
-	value,
-	defaultValue,
-}: {
-	value: string | null;
-	defaultValue: boolean;
-}): boolean => {
+/**
+ * searchParams을(를) boolean으로 변환하고 검증
+ *
+ * @param {string | null} value - searchParams
+ * @returns {boolean | null}
+ * - 'true': true
+ * - 'false': false
+ * - other: null
+ */
+export const validateBooleanParams = (value: string | null): boolean | null => {
 	if (value === 'true') {
 		return true;
 	}
@@ -12,28 +15,32 @@ export const validateBooleanParams = ({
 		return false;
 	}
 
-	return defaultValue;
+	return null;
 };
 
-export const validateNumberParams = ({
-	value,
-	defaultValue,
-	min,
-	max,
-}: {
-	value: string | null;
-	defaultValue: number;
-	min?: number;
-	max?: number;
-}): number => {
+/**
+ * searchParams을(를) number로 변환하고 검증. min or max 범위를 넘어가지 않도록 함
+ *
+ * @param {string | null} value - searchParams
+ * @param {Object} options - { min?: number; max?: number }
+ * @param {number} [options.min] - 최솟값
+ * @param {number} [options.max] - 최댓값
+ * @returns {number | null} Number()로 캐스팅한 값
+ * - null: null
+ * - NaN: null
+ */
+export const validateNumberParams = (
+	value: string | null,
+	{ min, max }: { min?: number; max?: number } = {},
+): number | null => {
 	if (!value) {
-		return defaultValue;
+		return null;
 	}
 
 	const parsedValue = Number(value);
 
 	if (isNaN(parsedValue)) {
-		return defaultValue;
+		return null;
 	}
 
 	if (min && parsedValue < min) {
@@ -47,13 +54,24 @@ export const validateNumberParams = ({
 	return parsedValue;
 };
 
-export const validateSizeParams = ({
-	value,
+/**
+ * searchParams을(를) size(% 비율 표기 or number)로 변환하고 검증
+ *
+ * @param {string | null} value - searchParams
+ * @param {Object} options - { defaultValue: number | string; min?: number; max?: number }
+ * @param {number | string} options.defaultValue - 검증에 실패했을 때 반환할 기본값
+ * @param {number} [options.min] - 최솟값 (number)
+ * @param {number} [options.max] - 최댓값 (number)
+ * @returns {string | number}
+ * - 비율표기 (0-100%): string 그대로 반환
+ * - null: options.defaultValue
+ * - NaN: options.defaultValue
+ */
+export const validateSizeParams = (value: string | null, {
 	defaultValue,
 	min,
 	max,
 }: {
-	value: string | null;
 	defaultValue: number | string;
 	min?: number;
 	max?: number;
