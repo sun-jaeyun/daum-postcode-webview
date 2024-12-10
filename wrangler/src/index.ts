@@ -4,6 +4,7 @@ import libraries from './libraries';
 import type Theme from './types/theme';
 import {
 	validateBooleanParams,
+	validateHexCode,
 	validateNumberParams,
 	validateSizeParams,
 } from './utils/validateParams';
@@ -75,15 +76,15 @@ export default {
 		const useBannerLink = validateBooleanParams(searchParams.get('useBannerLink'));
 
 		// theme
-		const bgColor = searchParams.get('bgColor');
-		const searchBgColor = searchParams.get('searchBgColor');
-		const contentBgColor = searchParams.get('contentBgColor');
-		const pageBgColor = searchParams.get('pageBgColor');
-		const textColor = searchParams.get('textColor');
-		const queryTextColor = searchParams.get('queryTextColor');
-		const postcodeTextColor = searchParams.get('postcodeTextColor');
-		const emphTextColor = searchParams.get('emphTextColor');
-		const outlineColor = searchParams.get('outlineColor');
+		const bgColor = validateHexCode(searchParams.get('bgColor'));
+		const searchBgColor = validateHexCode(searchParams.get('searchBgColor'));
+		const contentBgColor = validateHexCode(searchParams.get('contentBgColor'));
+		const pageBgColor = validateHexCode(searchParams.get('pageBgColor'));
+		const textColor = validateHexCode(searchParams.get('textColor'));
+		const queryTextColor = validateHexCode(searchParams.get('queryTextColor'));
+		const postcodeTextColor = validateHexCode(searchParams.get('postcodeTextColor'));
+		const emphTextColor = validateHexCode(searchParams.get('emphTextColor'));
+		const outlineColor = validateHexCode(searchParams.get('outlineColor'));
 		const theme: Theme = {
 			bgColor,
 			searchBgColor,

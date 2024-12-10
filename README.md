@@ -10,7 +10,7 @@ Daum Postcode 기능을 더욱 빠르고 효율적으로 앱에 통합해보세�
 [Daum Postcode 공식문서](https://postcode.map.daum.net/guide#attributes)
 
 - library: 사용할 라이브러리
-> 기본값은 **'console_log'** 로, 결과를 콘솔에 표시하며 지원하는 라이브러리 목록은 <a name="supported-libraries">아래</a> 참조
+> 기본값은 **'console_log'** 로, 결과를 콘솔에 표시하며 지원하는 라이브러리 목록은 [아래](#supported-libraries) 참조
 - minWidth: 최소 너비
 - width: 고정 너비
 > 기본값은 500이지만 웹뷰에 적합한 UI를 위해 이 프로젝트에선  **'100%'** 로 설정되어 있음
@@ -33,6 +33,11 @@ Daum Postcode 기능을 더욱 빠르고 효율적으로 앱에 통합해보세�
 > 다른 링크로 이동하기에 웹뷰에서 사용 시 주의 필요
 
 ---
+### theme - hex code만 지원합니다(# 생략가능, url encoding 주의)
+> '#FFFFFF' - 가능  
+> 'FFFFFF' - 가능  
+> 'fff' - 가능  
+
 - bgColor: 바탕 배경색
 - searchBgColor: 검색창 배경색
 - contentBgColor: 본문 배경색(검색결과,결과없음,첫화면,검색서제스트)
@@ -46,9 +51,9 @@ Daum Postcode 기능을 더욱 빠르고 효율적으로 앱에 통합해보세�
 
 > 기본 옵션과 제약 등은 공식문서에서 확인하길 권장합니다. - [Daum Postcode 공식문서](https://postcode.map.daum.net/guide#attributes)
 
-예시) https://daum-postcode-webview.sun-jaeyun98.workers.dev/?library=flutter_inappwebview&animation=true&shorthand=false&pleaseReadGuide=true&maxSuggestItems=5&hideMapBtn=true&textColor=%23FF8000
+예시) https://daum-postcode-webview.sun-jaeyun98.workers.dev/?library=flutter_inappwebview&animation=true&shorthand=false&pleaseReadGuide=true&maxSuggestItems=5&hideMapBtn=true&bgColor=333333&textColor=%23FF8000
 
-## [지원하는 라이브러리 목록](#supported-libraries)
+## <a name="supported-libraries">지원하는 라이브러리 목록</a>
 
 - [WKWebview](https://developer.apple.com/documentation/webkit/wkwebview)
 - [WebView(Android)](https://developer.android.com/reference/android/webkit/WebView)
