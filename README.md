@@ -10,10 +10,19 @@ Daum Postcode 기능을 더욱 빠르고 효율적으로 앱에 통합해보세�
 
 ## 사용가능한 파라미터
 
+### onComplete
+> 두개 중 택 1. 둘다 전달될 경우 scheme을 따릅니다.
+
 - library: 사용할 라이브러리
 > 기본값은 **'console_log'** 로, 결과를 콘솔에 표시하며 지원하는 라이브러리 목록은 [아래](#supported-libraries) 참조
 
+- scheme: 리다이렉트 할 custom URL Scheme
+> 유효하지 않은 경우 무시됨
+---
+### Daum Postcode
+
 [Daum Postcode 공식문서](https://postcode.map.daum.net/guide#attributes)
+
 - minWidth: 최소 너비
 - width: 고정 너비
 > 기본값은 500이지만 웹뷰에 적합한 UI를 위해 이 프로젝트에선  **'100%'** 로 설정되어 있음
@@ -75,4 +84,4 @@ wrangler 또는 serverless(지원 예정)을 선택해 선호하는 플랫폼에
 - 테스트 작성
 - [serverless](https://www.serverless.com) 프레임워크 지원
 - Contribution Guide
-- 프로젝트별 배포 가이드
+- 플랫폼별 배포 가이드

@@ -7,7 +7,7 @@ class PageDaumPostcode extends StatelessWidget {
   const PageDaumPostcode({super.key});
 
   static final uri = Uri.parse('https://daum-postcode-webview.sun-jaeyun98.workers.dev/').replace(
-    queryParameters: {'library': 'flutter_inappwebview'},
+    queryParameters: {'library': 'webview_flutter'},
   );
 
   @override

@@ -5,8 +5,10 @@ import type Theme from './types/theme';
 import {
 	validateBooleanParams,
 	validateHexCode,
+	validateLibrary,
 	validateNumberParams,
 	validateSizeParams,
+	validateUrlScheme,
 } from './utils/validateParams';
 
 export default {
@@ -22,8 +24,13 @@ export default {
 		const title = searchParams.get('title') ?? TITLE;
 
 		// onComplete
-		const library = searchParams.get('library') ?? DEFAULT_LIBRARY;
-		const onComplete = libraries.get(library);
+		const library = validateLibrary(searchParams.get('library')) ?? DEFAULT_LIBRARY;
+		let onComplete = libraries.get(library);
+
+		const scheme = validateUrlScheme(searchParams.get('scheme'));
+		if (scheme) {
+			onComplete = `(data)=>{const query=new URLSearchParams(data).toString();window.location=\`${scheme}://complete?$\{query\}\`}`;
+		}
 
 		/*
 			parameters - https://postcode.map.daum.net/guide
