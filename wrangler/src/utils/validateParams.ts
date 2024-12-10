@@ -1,8 +1,51 @@
+import libraries from '../libraries';
+
+/**
+ * searchParams이 libraries에 존재하는 지 검증
+ *
+ * @param {string | null} value - searchParams
+ *
+ * @returns {string | null} 유효하다면 그대로 반환, 유효하지 않다면 null 반환
+ */
+export const validateLibrary = (value: string | null): string | null => {
+	if (!value) {
+		return null;
+	}
+
+	if (!libraries.has(value)) {
+		return null;
+	}
+
+	return value;
+};
+
+/**
+ * searchParams이 유효한 URL Scheme인지 검증
+ *
+ * @param {string | null} value - searchParams
+ *
+ * @returns {string | null} 유효하다면 그대로 반환, 유효하지 않다면 null 반환
+ */
+export const validateUrlScheme = (value: string | null): string | null => {
+	if (!value) {
+		return null;
+	}
+
+	const urlSchemeRegex = /^[a-zA-Z][a-zA-Z0-9+.-]*$/;
+	const match = value.match(urlSchemeRegex);
+
+	if (!match) {
+		return null;
+	}
+
+	return value;
+};
+
 /**
  * searchParams을(를) boolean으로 변환하고 검증
  *
  * @param {string | null} value - searchParams
- * 
+ *
  * @returns {boolean | null}
  * - 'true': true
  * - 'false': false
@@ -26,7 +69,7 @@ export const validateBooleanParams = (value: string | null): boolean | null => {
  * @param {Object} options - { min?: number; max?: number }
  * @param {number} [options.min] - 최솟값
  * @param {number} [options.max] - 최댓값
- * 
+ *
  * @returns {number | null} Number()로 캐스팅한 값
  * - null: null
  * - NaN: null
@@ -64,21 +107,24 @@ export const validateNumberParams = (
  * @param {number | string} options.defaultValue - 검증에 실패했을 때 반환할 기본값
  * @param {number} [options.min] - 최솟값 (number)
  * @param {number} [options.max] - 최댓값 (number)
- * 
+ *
  * @returns {string | number}
  * - 비율표기 (0-100%): string 그대로 반환
  * - null: options.defaultValue
  * - NaN: options.defaultValue
  */
-export const validateSizeParams = (value: string | null, {
-	defaultValue,
-	min,
-	max,
-}: {
-	defaultValue: number | string;
-	min?: number;
-	max?: number;
-}): string | number => {
+export const validateSizeParams = (
+	value: string | null,
+	{
+		defaultValue,
+		min,
+		max,
+	}: {
+		defaultValue: number | string;
+		min?: number;
+		max?: number;
+	},
+): string | number => {
 	if (!value) {
 		return defaultValue;
 	}
@@ -113,20 +159,20 @@ export const validateSizeParams = (value: string | null, {
  * searchParams을(를) hex code로 변환하고 검증
  *
  * @param {string | null} value - searchParams
- * 
+ *
  * @returns {string | null} hex code(# 생략가능)이면 #을 붙여서 반환, 아니면 null 반환
  */
 export const validateHexCode = (value: string | null): string | null => {
-  if (!value) {
-    return null;
-  }
+	if (!value) {
+		return null;
+	}
 
-  const hexCodeRegex = /^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
-  const match = value.match(hexCodeRegex);
+	const hexCodeRegex = /^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+	const match = value.match(hexCodeRegex);
 
-  if (!match) {
-    return null;
-  }
+	if (!match) {
+		return null;
+	}
 
-  return `#${match[1]}`;
+	return `#${match[1]}`;
 };
