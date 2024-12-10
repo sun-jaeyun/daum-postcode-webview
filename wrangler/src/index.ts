@@ -31,10 +31,10 @@ export default {
 			width: 500 (> 300),
 			height: 500 (> 400),
       animation: false,
-      shorthand: true,
       focusInput: true,
       autoMappingRoad: true,
       autoMappingJibun: true,
+      shorthand: true,
       pleaseReadGuide: 0 (3 ~ 20),
       pleaseReadGuideTimer: 1.5 (0.1 ~ 60)
       maxSuggestItems: 10 (1 ~ 10),
@@ -54,10 +54,10 @@ export default {
 			min: 400,
 		});
 		const animation = validateBooleanParams(searchParams.get('animation'));
-		const shorthand = validateBooleanParams(searchParams.get('shorthand'));
 		const focusInput = validateBooleanParams(searchParams.get('focusInput'));
 		const autoMappingRoad = validateBooleanParams(searchParams.get('autoMappingRoad'));
 		const autoMappingJibun = validateBooleanParams(searchParams.get('autoMappingJutable'));
+		const shorthand = validateBooleanParams(searchParams.get('shorthand'));
 		const pleaseReadGuide = validateNumberParams(searchParams.get('pleaseReadGuide'), {
 			min: 3,
 			max: 20,
