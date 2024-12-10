@@ -1,16 +1,18 @@
 # daum-postcode-webview
 
+Daum Postcode 기능을 더욱 빠르고 효율적으로 앱에 통합해보세요. 🎯  
+daum-postcode-webview는 앱 개발 시 Daum Postcode를 간편하게 테스트하기 위해 만들어졌어요. 쿼리를 통해 옵션을 전달하면, 자동으로 구성이 완료된 `HTML`을 생성해 제공합니다. 제공된 `HTML`을 웹뷰에 올리고 이제 앱 로직에만 신경쓰세요.  
+> [examples](/examples)에서 앱 통합 예시 코드를 확인할 수 있습니다.
+
 [데모](https://daum-postcode-webview.sun-jaeyun98.workers.dev/)
-
-앱 개발 시 Daum Postcode를 간편하게 테스트 해보세요. 쿼리를 통해 옵션을 전달하면, 자동으로 구성이 완료된 `HTML`을 생성해 제공합니다.  
-
-Daum Postcode 기능을 더욱 빠르고 효율적으로 앱에 통합해보세요. 🎯
+> 데모 버전은 Cloudflare Workers(Wrangler)로 배포되어 있으며, 일일 10만 회 요청 제한이 있습니다.
 
 ## 사용가능한 파라미터
-[Daum Postcode 공식문서](https://postcode.map.daum.net/guide#attributes)
 
 - library: 사용할 라이브러리
 > 기본값은 **'console_log'** 로, 결과를 콘솔에 표시하며 지원하는 라이브러리 목록은 [아래](#supported-libraries) 참조
+
+[Daum Postcode 공식문서](https://postcode.map.daum.net/guide#attributes)
 - minWidth: 최소 너비
 - width: 고정 너비
 > 기본값은 500이지만 웹뷰에 적합한 UI를 위해 이 프로젝트에선  **'100%'** 로 설정되어 있음
@@ -63,6 +65,10 @@ Daum Postcode 기능을 더욱 빠르고 효율적으로 앱에 통합해보세�
 ## 지원 예정 라이브러리
 
 - react-native-webview
+
+## 배포 옵션
+wrangler 또는 serverless(지원 예정)을 선택해 선호하는 플랫폼에 직접 배포할 수 있어요.  
+프로덕션 배포 시에는 테스트 완료한 `HTML`을 직접 다운로드해 CDN을 통해 제공하는 걸 추천해요.
 
 ## TODO
 
