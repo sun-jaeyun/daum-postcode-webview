@@ -19,7 +19,7 @@ Daum Postcode 기능을 더욱 빠르고 효율적으로 앱에 통합해보세�
 - scheme: 리다이렉트 할 custom URL Scheme
 > 유효하지 않은 경우 무시됨
 ---
-### Daum Postcode
+### Daum Postcode 옵션
 
 [Daum Postcode 공식문서](https://postcode.map.daum.net/guide#attributes)
 
@@ -46,7 +46,7 @@ Daum Postcode 기능을 더욱 빠르고 효율적으로 앱에 통합해보세�
 
 ---
 ### theme - hex code만 지원합니다(# 생략가능, url encoding 주의)
-> 예시) '#FFFFFF', 'ffffff', 'FFF' ...
+> 예시) '%23FFFFFF', 'FFFFFF', '%23ffffff', 'FFF' ...
 
 - bgColor: 바탕 배경색
 - searchBgColor: 검색창 배경색
