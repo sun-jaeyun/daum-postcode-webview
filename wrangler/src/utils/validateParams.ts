@@ -2,6 +2,7 @@
  * searchParams을(를) boolean으로 변환하고 검증
  *
  * @param {string | null} value - searchParams
+ * 
  * @returns {boolean | null}
  * - 'true': true
  * - 'false': false
@@ -25,6 +26,7 @@ export const validateBooleanParams = (value: string | null): boolean | null => {
  * @param {Object} options - { min?: number; max?: number }
  * @param {number} [options.min] - 최솟값
  * @param {number} [options.max] - 최댓값
+ * 
  * @returns {number | null} Number()로 캐스팅한 값
  * - null: null
  * - NaN: null
@@ -62,6 +64,7 @@ export const validateNumberParams = (
  * @param {number | string} options.defaultValue - 검증에 실패했을 때 반환할 기본값
  * @param {number} [options.min] - 최솟값 (number)
  * @param {number} [options.max] - 최댓값 (number)
+ * 
  * @returns {string | number}
  * - 비율표기 (0-100%): string 그대로 반환
  * - null: options.defaultValue
@@ -104,4 +107,26 @@ export const validateSizeParams = (value: string | null, {
 	}
 
 	return parsedValue;
+};
+
+/**
+ * searchParams을(를) hex code로 변환하고 검증
+ *
+ * @param {string | null} value - searchParams
+ * 
+ * @returns {string | null} hex code(# 생략가능)이면 #을 붙여서 반환, 아니면 null 반환
+ */
+export const validateHexCode = (value: string | null): string | null => {
+  if (!value) {
+    return null;
+  }
+
+  const hexCodeRegex = /^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+  const match = value.match(hexCodeRegex);
+
+  if (!match) {
+    return null;
+  }
+
+  return `#${match[1]}`;
 };
